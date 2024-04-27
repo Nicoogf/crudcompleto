@@ -1,4 +1,6 @@
-import { Schema , models , model} from "mongoose";
+import mongoose from 'mongoose';
+
+const { Schema, model , models} = mongoose ;
  
 const UserSchema =  new Schema({
     username : {
@@ -16,6 +18,8 @@ const UserSchema =  new Schema({
         type: String,
         required: true
     },
+},{
+    timestamps: true
 })
 
 
