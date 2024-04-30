@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form"
 import { useAuth } from '../context/authContext'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const RegisterPage = () => {
@@ -47,6 +47,10 @@ const RegisterPage = () => {
             )}
             <button type='submit' className='bg-blue-500 text-white font-semibold w-[70%] max-w-[300px] mx-auto p-2 rounded-lg'> Registrar </button>
         </form>
+
+        <p>
+        ya tienes una cuenta ? <Link to="/loguin">Ingresa</Link>
+      </p>
     </div>
   )
 }

@@ -1,5 +1,5 @@
-import React, { createContext, useState, useContext } from 'react'
-import { registerRequest } from '../api/auth'
+import React, { createContext, useState, useContext, useEffect } from 'react'
+import { registerRequest , loguinRequest} from '../api/auth'
 
 
 export const AuthContext = createContext()
@@ -29,8 +29,31 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const signin = async( user ) => {
+        try {
+            const res = await loguinRequest(user)
+            console.log(res)
+        } catch (error) {
+            console.log(error.response.data)
+            if(Array.isArray(error.ressponse.data)){
+                setErrors(error.response.data)
+            }
+            setErrors([error.response.data.message])
+           
+        }
+    }
+
+    useEffect(()=> {
+        if(errors.length > 0) {
+            const timer = setTimeout(()=> {
+                setErrors([])
+            } , 5000 )
+            return () => clearTimeout(timer)
+        }
+    },[errors])
+
     return (
-        <AuthContext.Provider value={{ signup, user , isAuthenticated , errors}}>
+        <AuthContext.Provider value={{ signup, signin, user , isAuthenticated , errors}}>
             {children}
         </AuthContext.Provider>
     )
