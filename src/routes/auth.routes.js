@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { logout, loguin, profile, register } from "../controllers/auth.controller.js";
+import { logout, loguin, profile, register, verifyToken } from "../controllers/auth.controller.js";
 import { authRequired } from "../middleware/validateToken.js";
 import { validateSchema }  from "../middleware/validator.middleware.js"
 import { loguinSchema, registerSchema } from "../schemas/auth.schema.js";
@@ -12,7 +12,9 @@ router.post("/loguin", validateSchema(loguinSchema), loguin)
 
 router.post("/logout", logout)
 
-router.get("/profile", authRequired, profile)
+router.get("/verify", verifyToken )
+
+router.get("/profile", authRequired , profile)
 
 
 export default router; 
